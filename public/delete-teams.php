@@ -8,7 +8,7 @@ function pageController()
     // var_dump($teams);
     foreach ($teams as $teamId) {
         // Generate the DELETE statement for each team_id
-        $delete = '';
+        $delete = "DELETE FROM teams WHERE id = $teamId";
         // Copy and paste the statements in SQL PRO and verify they're correct.
         var_dump($delete);
     }

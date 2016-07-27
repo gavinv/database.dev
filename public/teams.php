@@ -2,15 +2,16 @@
 require __DIR__ . '/../src/Input.php';
 
 function pageController()
-{
-    // Write the query to retrieve the details of all of the teams
-    $sql = '';
+{   
+    $sql = "SELECT * FROM teams";
     // Copy the query and test it in SQL Pro
-    var_dump($sql);
     if (Input::has('team_or_stadium')) {
+        $query = Input::get('team_or_stadium');
     // Concatenate the WHERE clause that filters the teams by similar names
     // or stadiums
+        $sql .= " WHERE name LIKE '%$query%' OR stadium LIKE '%$query%';";
     }
+    var_dump($sql);
     return [
     'title' => 'Teams',
     ];
