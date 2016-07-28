@@ -6,7 +6,7 @@ function pageController()
   $sql = "SELECT * FROM teams";
   $query = Input::get('team_or_stadium', '');
   $sort = Input::get('sort_by', '');
-  $page = Input::get('page', 0);
+  
     // Copy the query and test it in SQL Pro
   if (Input::has('team_or_stadium')) {
     $sql .= " WHERE name LIKE '%$query%' OR stadium LIKE '%$query%'";
@@ -16,14 +16,10 @@ function pageController()
     // stadium.
     $sql .= " ORDER BY $sort ASC;";
   }
-  if (Input::has('page') && $page > 0) {
-    $limit = 5;
-    $offset = ($page - 1) * $limit;
-    $sql .= " LIMIT $limit OFFSET $offset";
-  } else {
-    $page = 1;
-    $sql .= " LIMIT 5 OFFSET 0";
-  }
+  $page = Input::get('page', 1) < 0 ? 1 : Input::get('page');
+  $page = max([Input::get('page', 1), 1]);
+  $offset = $page * 5 - 5;
+  $sql .= " LIMIT 5 OFFSET $offset";
   var_dump($sql);
   return [
   'title' => 'Teams',
