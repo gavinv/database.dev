@@ -3,12 +3,11 @@ require __DIR__ . '/../src/Input.php';
 
 function pageController()
 {
-    $teams = Input::get('teams');  // You'll get an array with team IDs
-    // You can var_dump the values if you're curious
-    // var_dump($teams);
+    $teams = Input::get('teams', []);  
+    $ids = implode(', ', $teams);
     foreach ($teams as $teamId) {
         // Generate the DELETE statement for each team_id
-        $delete = "DELETE FROM teams WHERE id = $teamId";
+        $delete = "DELETE FROM teams WHERE id ()";
         // Copy and paste the statements in SQL PRO and verify they're correct.
         var_dump($delete);
     }

@@ -9,6 +9,7 @@
             name="name"
             id="name"
             placeholder="Texas Rangers"
+            value="<?= $name ?>"
         >
     </div>
 </div>
@@ -19,13 +20,13 @@
     <div class="col-sm-10">
         <div class="radio">
             <label>
-                <input type="radio" name="league" value="american" checked>
+                <input type="radio" name="league" value="american" <?= 'american' == $league ? 'checked' : '' ?> >
                 American
             </label>
         </div>
         <div class="radio">
             <label>
-                <input type="radio" name="league" value="national">
+                <input type="radio" name="league" value="national" <?php if($league == 'national'): ?> checked <?php endif; ?> >
                 National
             </label>
         </div>
@@ -42,6 +43,7 @@
             name="stadium"
             id="stadium"
             placeholder="Globe Life Park"
+            value="<?= $stadium ?>"
         >
     </div>
 </div>

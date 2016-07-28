@@ -3,10 +3,10 @@ require __DIR__ . '/../src/Input.php';
 
 function pageController()
 {
+    $name = Input::get('name', '');
+    $league = Input::get('league', '');
+    $stadium = Input::get('stadium', '');
     if (Input::isPost()) {
-        $name = Input::get('name');
-        $league = Input::get('league');
-        $stadium = Input::get('stadium');
         // Write the INSERT statement to insert a team
         // Either interpolate or concatenate the PHP variables
         $insert = "INSERT INTO teams(name, stadium, league) VALUES('$name', '$stadium', '$league');";
@@ -14,7 +14,10 @@ function pageController()
         var_dump($insert);
     }
     return [
-        'title' => 'New Team'
+        'title' => 'New Team',
+        'name' => $name,
+        'league' => $league,
+        'stadium' => $stadium
     ];
 }
 extract(pageController());
