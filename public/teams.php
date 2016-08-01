@@ -16,7 +16,7 @@ function pageController()
     // stadium.
     $sql .= " ORDER BY $sort ASC;";
   }
-  //$page = Input::get('page', 1) < 0 ? 1 : Input::get('page');
+  // $page = Input::get('page', 1) < 0 ? 1 : Input::get('page');
   $page = max([Input::get('page', 1), 1]);
   $offset = $page * 5 - 5;
   $sql .= " LIMIT 5 OFFSET $offset";
