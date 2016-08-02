@@ -8,10 +8,28 @@ function pageController()
     // - Number of Games won as local
     // - Number of Games won as visitor
     // Use joins or sub-queries as needed...
-    $sql = '';
+    $sql = 'SELECT (
+    SELECT count(*)
+    FROM games
+    WHERE (local_team_id = 28 AND visitor_team_runs < local_team_runs)
+    OR visitor_team_id = 28 AND visitor_team_runs > local_team_runs
+) AS "Wins", (
+    SELECT count(*)
+    FROM games
+    WHERE (local_team_id = 28 AND visitor_team_runs > local_team_runs)
+    OR visitor_team_id = 28 AND visitor_team_runs < local_team_runs
+) AS "Losses", (
+    SELECT count(*)
+    FROM games
+    WHERE (local_team_id = 28 AND visitor_team_runs < local_team_runs)
+) AS "Local Wins", (
+    SELECT count(*)
+    FROM games
+    WHERE (visitor_team_id = 28 AND visitor_team_runs > local_team_runs)
+) AS "Visitor Wins"';
     // Copy the generated query and verify that it retrieves the correct values
     // in SQL Pro
-    var_dump($sql);
+    echo $sql;
     return [
         'title' => 'Statistics Texas Rangers',
     ];
